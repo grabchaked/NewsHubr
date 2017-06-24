@@ -1,0 +1,51 @@
+doctype html
+html
+    head
+        title NewsHubr
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='icon', type='image/x-icon', href='/logo.jpg')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/css/styles.css')
+        
+
+    body
+        nav.navbar.navbar-inverse.navbar-static-top
+              .container-fluid
+                .navbar-header
+                  button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                        
+                  a.navbar-brand(href='/')
+                      img.logo.img-responsive(src='/logo.jpg')
+
+             
+                #myNavbar.collapse.navbar-collapse
+                  ul.nav.navbar-nav
+                    li
+                      a(href='/posts/add') Add Post
+                     
+                  ul.nav.navbar-nav.navbar-right
+                    li
+                      a(href='/users/register')
+                        span.glyphicon.glyphicon-user
+                        |  Sign Up
+                    li
+                      a(href='/users/login')
+                        span.glyphicon.glyphicon-log-in
+                        |  Login
+
+        .container
+            block content
+            br
+            hr
+            footer
+                p &copy; NewsHubr 2017 by Eduard Grabchak 
+                
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    script(scr='/js/filter.js')
+    script(src='/js/delete-post.js')
+    

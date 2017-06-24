@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1 #{title}
+    form(method='POST', action='/posts/add')
+        .form-group
+            label Title:
+            input.form-control(name='title', type='text' placeholder='Name of post' required)
+        .form-group
+            label Image link:
+            input.form-control(name='img_url', type='text' placeholder='URL of image' required)      
+        .form-group
+            label Author:
+            input.form-control(name='author', type='text' placeholder='Your nickname' required)    
+        input.btn.btn-success(type='submit', value='Submit')

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1 #{title}
+    form(method='POST', action='/posts/edit/'+post._id)
+        .form-group
+            label Title:
+            input.form-control(name='title', type='text' placeholder='Name of post', value=post.title required)
+        .form-group
+            label Image link:
+            input.form-control(name='img_url', type='text' placeholder='URL of image', value=post.img_url required)      
+        .form-group
+            label Author:
+            input.form-control(name='author', type='text', value=post.author required)    
+        input.btn.btn-success(type='submit', value='Submit')

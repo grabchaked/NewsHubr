@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    h1.text-center #{title}
+        form
+          .form-group.row
+            .col-xs-4.pull-right
+            //-   input.form-control(type='text', placeholder='Type here for seach a post' id='txtList')
+    br
+    div#posts
+        ul.list-group
+            each post, i in posts 
+                li.list-group-item.item
+                    a(href='/post/'+post._id)= post.title

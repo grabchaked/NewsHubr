@@ -1,0 +1,25 @@
+{
+  "name": "news-hub",
+  "version": "1.0.0",
+  "description": "NewsHubr is a service where you share the news that interests you.",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server"
+  },
+  "author": "Eduard Grabchak",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "connect-flash": "^0.1.1",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "mongoose": "^4.10.2",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.0-rc.2"
+    },
+    "engines": {
+    "node":"*"
+    }
+}
