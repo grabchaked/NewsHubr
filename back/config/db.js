@@ -1,4 +1,4 @@
 module.exports = {
-    db:'mongodb://localhost:27017/newshub',
-    secret:'key'
+    db:process.env.MONGOLAB_URI || process.env.MONGODB_URI  || 'mongodb://localhost/newshub',
+    secret:'qwerasdfzxc'
 }
