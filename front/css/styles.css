@@ -48,8 +48,6 @@
 
 img {
     display: block;
-    margin: auto;
-
 }
 
 .logo:hover {
@@ -62,7 +60,7 @@ img {
         margin: 5px;
         overflow-y: auto;
         overflow-x: hidden;
-        max-height: 355px;
+        max-height: 455px;
     }
 
 span {

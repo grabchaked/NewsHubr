@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var pug = require('pug');
 var bcrypt = require('bcryptjs');
 var config = require('./back/config/db');
+var shortid = require('shortid');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.db);
@@ -34,14 +35,17 @@ app.use(bodyParser.json());
 app.set('views', path.join(__dirname, 'front/views'));
 app.set('view engine', 'pug');
 
+app.locals.moment = require('moment');
+
 app.get('/', function (req,res) {
-    Post.find({}, function (err,posts) {
+    Post.find({}, null, {sort: {created: -1}}, function (err,posts) {
         if(err) {
             console.log(err);
         } else {
         res.render('index', {
             title: 'NewsHubr',
-            posts:posts
+            posts:posts,
+            moment: require("moment")
         });
     }
     });
@@ -63,19 +67,24 @@ app.get('/posts/add', function (req,res) {
 
 app.post('/posts/add', function (req,res) {
     var post = new Post();
+    var id = shortid.generate();
     post.title = req.body.title;
     post.img_url = req.body.img_url;
-    post.created = req.body.created;
+    post.created = new Date();
     post.author = req.body.author;
+    post.author_id = id;
 
     post.save(function (err) {
         if(err){
             console.log(err);
             return;
         } else {
+            if (req.cookies === undefined || !req.cookies.hash) res.cookie("hash", id);
             res.redirect('/');
         }
     });
+
+
 });
 
 app.get('/post/edit/:id', function (req,res) {
@@ -106,13 +115,14 @@ app.post('/posts/edit/:id', function (req,res) {
     });
 });
 
-app.delete('/post/:id', function (req,res) {
-    var query = {_id:req.params.id}
+app.post('/post/delete', function (req,res) {
+    var hash = req.cookies.hash || "";
+    var query = {_id:req.body.id, hash: req.cookies.hash};
     Post.remove(query, function (err) {
         if(err){
             console.log(err);
         }
-        res.send('Success');
+        res.redirect(301, '/');
     });
 });
 

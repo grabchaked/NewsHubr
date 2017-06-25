@@ -1,15 +1,16 @@
 extends layout
 
 block content
-    
-    h3
-        | #{post.title} 
-        span | Written by #{post.author}
-    br
-    //- h5.pull-right Created at #{post.created}
-    br
-    img.img-responsive.img-sm(src=post.img_url)
-    
-    a.btn.btn-warning(href='/post/edit/'+post._id) Edit
-    a.btn.btn-danger.delete-post.pull-right(href='#', data-id=post._id) Delete
+    form(method="post", action="/post/delete")
+        input(type="hidden",name="id",value=post._id)
+        h3
+            | #{post.title} 
+            span | Written by #{post.author}
+        br
+        //- h5.pull-right Created at #{post.created}
+        br
+        img.img-responsive.img-sm(src=post.img_url)
+        
+        a.btn.btn-warning(href='/post/edit/'+post._id) Edit
+        input(type="submit", class="btn btn-danger", value="Delete")
     
