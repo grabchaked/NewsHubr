@@ -65,6 +65,12 @@ app.get('/posts/add', function (req,res) {
     });
 });
 
+app.get('/about', function (req,res) {
+    res.render('about', {
+        title:'About author'
+    });
+});
+
 app.post('/posts/add', function (req,res) {
     var post = new Post();
     var id = shortid.generate();

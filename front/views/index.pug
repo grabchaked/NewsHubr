@@ -2,17 +2,21 @@ extends layout
 
 block content
     h1.text-center #{title}
-        form
-          .form-group.row
-            .col-xs-4.pull-right
-            //-   input.form-control(type='text', placeholder='Type here for seach a post' id='txtList')
+        h3.text-center Service where you can share the news that interests you
+        //- form
+        //-   .form-group.row
+        //-     .col-xs-4.pull-right
+        //-        input.form-control(type='text', placeholder='Type here for seach a post' id='txtList')
     br
     div
         ul.list-group
             each post, i in posts 
                 li
+                    hr
                     //a(href='/post/'+post._id)= post.title
-                    h3 #{post.title} 
+                    h4 #{post.title}  ◆ 
                         small by #{post.author}
                     span(class="pull-right")=moment(post.createdAt).format("DD.MM.YYYY HH:mm")
                     img.img-responsive.img-sm(src=post.img_url)
+                    br
+                    
