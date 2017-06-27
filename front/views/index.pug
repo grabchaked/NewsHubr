@@ -1,13 +1,14 @@
 extends layout
 
 block content
+    
     h1.text-center #{title}
-        h3.text-center Service where you can share the news that interests you
+        h3.text-center Service where you can share interesting news for you
         //- form
         //-   .form-group.row
         //-     .col-xs-4.pull-right
         //-        input.form-control(type='text', placeholder='Type here for seach a post' id='txtList')
-    br
+    
     div
         ul.list-group
             each post, i in posts 
