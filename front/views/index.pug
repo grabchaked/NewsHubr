@@ -4,10 +4,6 @@ block content
     
     h1.text-center #{title}
         h3.text-center Service where you can share interesting news for you
-        //- form
-        //-   .form-group.row
-        //-     .col-xs-4.pull-right
-        //-        input.form-control(type='text', placeholder='Type here for seach a post' id='txtList')
     
     div
         ul.list-group
@@ -17,7 +13,14 @@ block content
                     //a(href='/post/'+post._id)= post.title
                     h4 #{post.title}  ◆ 
                         small by #{post.author}
-                    span(class="pull-right")=moment(post.createdAt).format("DD.MM.YYYY HH:mm")
+                    a(href="/post/"+post._id, class="pull-right") Share
+                    br
+                    span(class="pull-right")=moment(post.created).format("DD.MM.YYYY HH:mm")
                     img.img-responsive.img-sm(src=post.img_url)
                     br
-                    
+        div(style="text-align:center;")
+            nav(aria-label='Page navigation')
+              ul.pagination
+                - for (var i = 1; i < pages; i++)
+                    li
+                        a(href='/?page='+i)=i

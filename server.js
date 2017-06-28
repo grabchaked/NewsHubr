@@ -10,6 +10,8 @@ var bcrypt = require('bcryptjs');
 var config = require('./back/config/db');
 var shortid = require('shortid');
 
+var PAGE_SIZE = 10;
+
 mongoose.Promise = global.Promise;
 mongoose.connect(config.db);
 var db = mongoose.connection;
@@ -38,17 +40,22 @@ app.set('view engine', 'pug');
 app.locals.moment = require('moment');
 
 app.get('/', function (req,res) {
-    Post.find({}, null, {sort: {created: -1}}, function (err,posts) {
-        if(err) {
-            console.log(err);
-        } else {
-        res.render('index', {
-            title: 'NewsHubr',
-            posts:posts,
-            moment: require("moment")
+    var page = req.query.page || 0;
+    Post.count({}, function(err, count) {
+        Post.find({}, null, {sort: {created: -1}}).skip(page * PAGE_SIZE).limit(PAGE_SIZE).exec(function (err,posts) {
+                if(err) {
+                    console.log(err);
+                } else {
+                res.render('index', {
+                    title: 'NewsHubr',
+                    posts: posts,
+                    moment: require("moment"),
+                    pages: Math.ceil(count / PAGE_SIZE)
+                });
+            }
         });
-    }
     });
+    
 });
 
 app.get('/post/:id', function (req,res) {
@@ -72,13 +79,8 @@ app.get('/about', function (req,res) {
 });
 
 app.post('/posts/add', function (req,res) {
-    var post = new Post();
+    var post = new Post(req.body);
     var id = shortid.generate();
-    post.title = req.body.title;
-    post.img_url = req.body.img_url;
-    post.created = new Date();
-    post.author = req.body.author;
-    post.author_id = id;
 
     post.save(function (err) {
         if(err){

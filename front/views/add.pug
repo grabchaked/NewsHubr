@@ -3,6 +3,7 @@ extends layout
 block content
     h1.text-center #{title}
     form(method='POST', action='/posts/add')
+        input(type="hidden", value=new Date(), name="created")
         .form-group
             label Title:
             input.form-control(name='title', type='text' placeholder='Name of post' required)
