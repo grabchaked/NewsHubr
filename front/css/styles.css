@@ -21,6 +21,14 @@ ul > li:last-child hr{
 
 }
 
+.share{
+    overflow: auto;
+
+    width: 120px;
+    white-space: nowrap;
+    display: inline-block;
+}
+
 .navbar {
     margin-bottom: 0;
     z-index: 9999;
